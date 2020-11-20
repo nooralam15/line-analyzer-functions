@@ -43,16 +43,23 @@ function getSlope(x1, y1, x2, y2) {
 
 function getDescription(x1, y1, x2, y2) {
     //look at the slope to determine direction of the line
-    if (getSlope(x1, y1, x2, y2) > 0) {
+    let slope = getSlope(x1, y1, x2, y2)
+    if (slope > 0) {
         return "increasing"
     }
-    else {
+    else if (slope < 0) {
         return "decreasing"
+    }
+    else if (slope == "undefined") {
+        return "vertical"
+    }
+    else {
+        return "horizontal"
     }
 }
 
 function getPointLocation(x,y) {
-    //look at the point location based on the quadrant
+    //look at the point location based on the x,y coordinate
     if (x > 0 && y > 0) {
         return "Quadrant 1"
     }
@@ -62,8 +69,17 @@ function getPointLocation(x,y) {
     else if (x < 0 && y < 0 ) {
         return "Quadrant 3"
     }
-    else {
+    else if (x < 0 && y > 0) {
         return "Qudrant 2"
+    }
+    else if (x != 0 && y == 0) {
+        return "X-axis "
+    }
+    else if (x == 0 & y != 0) {
+        return "Y-axis"
+    }
+    else {
+        return "Origin"
     }
 }
 
@@ -71,16 +87,13 @@ function getEquation(x1, y1, x2, y2) {
     // use the y = mx + b to find the equation
     let m = getSlope(x1, y1, x2, y2)
     let b = y1 - m * x1
-    let equation = "y" + " " +  "=" + " "
     if (m == 0) {
-        return  equation +  " "  + b
+        return "y = " + b
     }
     else if (m == "undefined") {
-        return "undefined"
+        return "x = " + x1
     }
     else {
-        return equation + m + "x" + " " + "+" + " " + b
+        return "y = " + m + "x + " + b
     }
 }
-
-
